@@ -1,14 +1,18 @@
 package com.example.capstonereisplanner.ui
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.example.capstonereisplanner.R
+import com.example.capstonereisplanner.viewmodel.StationViewModel
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel: StationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +23,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        Log.d("Stations", viewModel.getStations().toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
