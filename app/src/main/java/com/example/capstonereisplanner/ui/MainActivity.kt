@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        Log.d("Stations",viewModel.getStations().toString())
+        Log.d("Stations", viewModel.getStations().toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
