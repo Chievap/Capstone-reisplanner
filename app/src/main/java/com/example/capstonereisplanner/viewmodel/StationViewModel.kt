@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.capstonereisplanner.results.StationSearchResult
 import androidx.lifecycle.viewModelScope
 import com.example.capstonereisplanner.converter.StationConverter
-import com.example.capstonereisplanner.model.SavableStation
+import com.example.capstonereisplanner.entity.SavableStation
 import com.example.capstonereisplanner.model.Station
 import com.example.capstonereisplanner.repository.SavableStationRepository
 import com.example.capstonereisplanner.repository.StationRepository

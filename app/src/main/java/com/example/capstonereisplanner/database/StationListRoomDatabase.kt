@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.capstonereisplanner.dao.StationDao
-import com.example.capstonereisplanner.model.SavableStation
+import com.example.capstonereisplanner.entity.SavableStation
 
 @Database(entities = [SavableStation::class], version = 1, exportSchema = false)
 abstract class StationListRoomDatabase: RoomDatabase() {
