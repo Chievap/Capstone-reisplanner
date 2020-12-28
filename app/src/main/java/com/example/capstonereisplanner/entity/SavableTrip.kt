@@ -2,20 +2,17 @@ package com.example.capstonereisplanner.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
-@Entity
+@Entity(tableName = "SavableTrip")
 class SavableTrip(
+        val plannedDurationInMinutes: Int,
+        val transfers: Int,
+        val fromName: String,
+        val departureTime: String,
+        val arrivalTime: String,
+        val fromStops: Int,
+        val destinationName: String,
+        val cancelled: Boolean,
         @PrimaryKey(autoGenerate = true)
         val id: Long? = null,
-        plannedDurationInMinutes: Int,
-        transfers: Int,
-        fromName: String,
-        departureTime: Date,
-        arrivalTime: Date,
-        fromStops: Int,
-        destinationName: String,
-        cancelled: Boolean,
-) {
-
-}
+)
