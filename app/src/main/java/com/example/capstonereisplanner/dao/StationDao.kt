@@ -13,7 +13,7 @@ interface StationDao {
     fun getAllStations(): LiveData<List<SavableStation>>
 
     @Insert
-    suspend fun insertStation(game: SavableStation)
+    suspend fun insertStation(station: SavableStation)
 
     @Query("DELETE FROM SavableStation")
     suspend fun deleteAllStations()

@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 @Entity
 class SavableStation(
     val name: String,
-    @PrimaryKey(autoGenerate = false)
-    val code: Long,
+    val country: String,
+    val code: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long? = null
 ) {
 }

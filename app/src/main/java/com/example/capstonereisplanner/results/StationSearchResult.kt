@@ -1,4 +1,4 @@
-package com.example.capstonereisplanner.api
+package com.example.capstonereisplanner.results
 
 import com.example.capstonereisplanner.model.Station
 import com.google.gson.annotations.SerializedName
