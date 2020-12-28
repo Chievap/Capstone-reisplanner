@@ -1,3 +1,6 @@
+package com.example.capstonereisplanner.model.tripDetail
+
+import com.example.capstonereisplanner.model.tripDetail.ReasonEticketNotBuyable
 import com.google.gson.annotations.SerializedName
 
 /*

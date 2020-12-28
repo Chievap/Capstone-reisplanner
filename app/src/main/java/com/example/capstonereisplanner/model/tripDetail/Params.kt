@@ -1,3 +1,5 @@
+package com.example.capstonereisplanner.model.tripDetail
+
 import com.google.gson.annotations.SerializedName
 
 /*
