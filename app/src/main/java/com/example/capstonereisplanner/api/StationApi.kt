@@ -7,23 +7,23 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NsApi {
+class StationApi {
     companion object{
-        private const val baseUrl = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations/"
+        private const val stationUrl = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations/"
 
-        fun createApi(): NsApiService{
+        fun createApi(): StationApiService{
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor{addApiKeyInterceptor(it)}
                 .build()
 
             val nsApi = Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(stationUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            return nsApi.create(NsApiService::class.java)
+            return nsApi.create(StationApiService::class.java)
         }
 
         private fun addApiKeyInterceptor(it: Interceptor.Chain):Response{

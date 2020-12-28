@@ -10,9 +10,10 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import com.example.capstonereisplanner.R
 import com.example.capstonereisplanner.viewmodel.StationViewModel
+import com.example.capstonereisplanner.viewmodel.TripViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: StationViewModel by viewModels()
+    private val viewModel: TripViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
-        Log.d("Stations", viewModel.getStations().toString())
+        Log.d("TRIP", viewModel.getTrip("WUPPH","HAMM").trips.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
