@@ -1,18 +1,18 @@
 package com.example.capstonereisplanner.converter
 
+import com.example.capstonereisplanner.model.stationDetail.Payload
 import com.example.capstonereisplanner.entity.SavableStation
-import com.example.capstonereisplanner.model.Station
 
 class StationConverter {
-    fun convertStation(station:Station): SavableStation {
-        return SavableStation(name = station.getFullName(),country = station.land,code = station.code)
+    private fun convertStation(station: Payload): SavableStation {
+        return SavableStation(name = station.namen.lang,country = station.land,code = station.code)
     }
 
-    fun convertStations(stations: List<Station>): List<SavableStation>{
+    fun convertStations(stations: List<Payload>): List<SavableStation>{
         val savableStations = mutableListOf<SavableStation>()
 
-        for (station in stations){
-            savableStations.add(convertStation(station))
+        for (payload in stations){
+            savableStations.add(convertStation(payload))
         }
         return savableStations
     }

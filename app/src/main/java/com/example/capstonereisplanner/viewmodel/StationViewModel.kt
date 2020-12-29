@@ -1,14 +1,11 @@
 package com.example.capstonereisplanner.viewmodel
 
+import com.example.capstonereisplanner.model.StationResult
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.capstonereisplanner.results.StationSearchResult
 import androidx.lifecycle.viewModelScope
 import com.example.capstonereisplanner.converter.StationConverter
-import com.example.capstonereisplanner.entity.SavableStation
-import com.example.capstonereisplanner.model.Station
 import com.example.capstonereisplanner.repository.SavableStationRepository
 import com.example.capstonereisplanner.repository.StationRepository
 import kotlinx.coroutines.*
@@ -22,10 +19,10 @@ class StationViewModel(application: Application) : AndroidViewModel(application)
 
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-    private var stationList: LiveData<List<SavableStation>> = savableStationRepository.getStationList()
+    val stations: LiveData<StationResult> = stationRepository.stations
 
-    fun getStations(): List<SavableStation>? {
-        if (stationList.value != null) {
+    fun getStations() {
+        /*if (stationList.value != null) {
             return stationList.value
         }
         println("Starting fetch")
@@ -47,15 +44,19 @@ class StationViewModel(application: Application) : AndroidViewModel(application)
             }
         }
 
-        return stations?.let { stationConverter.convertStations(stations = it.results) }
+        return stations?.let { stationConverter.convertStations(stations = it.results) } */
+        viewModelScope.launch {
+            stationRepository.getStations()
+        }
+
     }
 
-    private suspend fun fetchStations(): MutableLiveData<StationSearchResult> {
+    /* private suspend fun fetchStations(): MutableLiveData<StationSearchResult> {
         var returnValue: MutableLiveData<StationSearchResult> = MutableLiveData()
         val job = viewModelScope.async {
             returnValue = stationRepository.getStations()
         }
         job.await()
         return returnValue
-    }
+    } */
 }

@@ -15,7 +15,7 @@ class SavableStationRepository(context: Context) {
         stationDao = database!!.stationDao()
     }
 
-    fun getStationList(): LiveData<List<SavableStation>>{
+    fun getStationList(): List<SavableStation>{
         return stationDao.getAllStations()
     }
 

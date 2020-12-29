@@ -10,7 +10,7 @@ import com.example.capstonereisplanner.entity.SavableStation
 interface StationDao {
 
     @Query("SELECT * FROM SavableStation")
-    fun getAllStations(): LiveData<List<SavableStation>>
+    fun getAllStations(): List<SavableStation>
 
     @Insert
     suspend fun insertStation(station: SavableStation)
