@@ -17,6 +17,7 @@ import com.example.capstonereisplanner.databinding.FragmentHomeBinding
 import com.example.capstonereisplanner.entity.SavableStation
 import com.example.capstonereisplanner.viewmodel.StationViewModel
 import kotlinx.coroutines.withTimeout
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -29,6 +30,8 @@ class HomeFragment : Fragment() {
     private lateinit var mSearchTextTo: EditText
     private lateinit var mRecyclerView: RecyclerView
     private val stationList = arrayListOf<SavableStation>()
+    private val stationSuggestions = arrayListOf<SavableStation>()
+    private lateinit var changeStationSearch: EditText
     private lateinit var searchAdapter: SearchAdapter
 
     private val stationConverter = StationConverter()
@@ -47,8 +50,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchAdapter = SearchAdapter(stationList, this::onStationClick)
+        searchAdapter = SearchAdapter(stationSuggestions, this::onStationClick)
         mSearchTextFrom = binding.searchTextFrom
+        changeStationSearch = mSearchTextFrom
         mSearchTextTo = binding.searchTextTo
         mRecyclerView = binding.listView
 
@@ -63,11 +67,11 @@ class HomeFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                println(s.toString())
+                filterSuggestions(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                changeStationSearch = mSearchTextFrom
             }
 
         })
@@ -78,20 +82,27 @@ class HomeFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                println(s.toString())
+                filterSuggestions(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                changeStationSearch = mSearchTextTo
             }
 
         })
 
         observeStations()
 
-        viewModel.stations.observe(viewLifecycleOwner,{
-            println("FUCK MY LIFE")
-        })
+    }
+
+    private fun filterSuggestions(searchTerm: String) {
+        stationSuggestions.clear()
+        stationSuggestions.addAll(stationList.filter { station: SavableStation ->
+            station.name.toLowerCase(Locale.ROOT).contains(
+                searchTerm.toLowerCase(Locale.ROOT)
+            )
+        }.toList())
+        searchAdapter.notifyDataSetChanged()
     }
 
     private fun observeStations() {
@@ -104,6 +115,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun onStationClick(station: SavableStation) {
+        this.stationSuggestions.clear()
+        this.searchAdapter.notifyDataSetChanged()
+
+        this.changeStationSearch.text.clear()
+        this.changeStationSearch.text.append(station.name)
         println(station.name)
     }
 

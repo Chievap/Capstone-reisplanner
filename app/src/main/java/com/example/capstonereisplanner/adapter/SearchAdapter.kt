@@ -43,7 +43,7 @@ class SearchAdapter(
             }
         }
         fun bind(station: SavableStation) {
-            itemStation.tvName.text = station?.name
+            itemStation.tvName.text = station.name
         }
     }
 }
