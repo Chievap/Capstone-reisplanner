@@ -8,16 +8,15 @@ import com.example.capstonereisplanner.model.tripDetail.Trips
 class TripConverter {
     fun convertTrips(trip: Trip): List<SavableTrip> {
         val savableTrips = mutableListOf<SavableTrip>()
-        //TODO: make legs dynamic
-        for (trip in trip.trips) {
-            savableTrips.add(SavableTrip(trip.actualDurationInMinutes,
-                    trip.transfers,
-                    trip.legs[0].origin.name,
-                    trip.legs[0].origin.plannedDateTime,
-                    trip.legs[1].origin.plannedDateTime,
-                    trip.legs[0].stops.size,
-                    trip.legs[1].origin.name,
-                    checkCancelled(trip.legs)))
+        for (trips in trip.trips) {
+            savableTrips.add(SavableTrip(trips.actualDurationInMinutes,
+                    trips.transfers,
+                    trips.legs[0].origin.name,
+                    trips.legs[0].origin.plannedDateTime,
+                    trips.legs[1].origin.plannedDateTime,
+                    trips.legs[0].stops.size,
+                    trips.legs[1].origin.name,
+                    checkCancelled(trips.legs)))
         }
 
         return savableTrips

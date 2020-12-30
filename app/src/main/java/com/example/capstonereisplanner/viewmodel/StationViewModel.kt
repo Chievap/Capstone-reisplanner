@@ -4,10 +4,12 @@ import com.example.capstonereisplanner.model.StationResult
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.capstonereisplanner.converter.StationConverter
 import com.example.capstonereisplanner.repository.SavableStationRepository
 import com.example.capstonereisplanner.repository.StationRepository
+import com.example.capstonereisplanner.results.StationSearchResult
 import kotlinx.coroutines.*
 
 class StationViewModel(application: Application) : AndroidViewModel(application) {
@@ -51,12 +53,12 @@ class StationViewModel(application: Application) : AndroidViewModel(application)
 
     }
 
-    /* private suspend fun fetchStations(): MutableLiveData<StationSearchResult> {
-        var returnValue: MutableLiveData<StationSearchResult> = MutableLiveData()
+    /*private suspend fun fetchStations(): MutableLiveData<StationResult> {
+        var returnValue: MutableLiveData<StationResult> = MutableLiveData()
         val job = viewModelScope.async {
             returnValue = stationRepository.getStations()
         }
         job.await()
         return returnValue
-    } */
+    }*/
 }
