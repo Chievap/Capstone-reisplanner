@@ -24,5 +24,20 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_routeFragment"
+            app:destination="@id/routeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeFragment"
+        android:name="com.example.capstonereisplanner.RouteFragment"
+        android:label="fragment_route"
+        tools:layout="@layout/fragment_route" >
+        <action
+            android:id="@+id/action_routeFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_routeFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
