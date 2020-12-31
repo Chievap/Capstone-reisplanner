@@ -13,9 +13,9 @@ class TripConverter {
                     trips.transfers,
                     trips.legs[0].origin.name,
                     trips.legs[0].origin.plannedDateTime,
-                    trips.legs[1].origin.plannedDateTime,
+                    trips.legs[0].destination.plannedDateTime,
                     trips.legs[0].stops.size,
-                    trips.legs[1].origin.name,
+                    trips.legs[0].destination.name,
                     checkCancelled(trips.legs)))
         }
 

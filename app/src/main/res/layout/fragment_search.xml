@@ -71,7 +71,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc"
         android:layout_width="match_parent"
-        android:layout_below="@id/linearLayout"
-        android:layout_height="573dp" />
+        android:layout_height="573dp"
+        android:layout_below="@id/linearLayout" />
 </RelativeLayout>

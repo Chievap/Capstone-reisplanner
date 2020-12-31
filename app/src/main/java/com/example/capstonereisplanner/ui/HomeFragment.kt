@@ -121,7 +121,6 @@ class HomeFragment : Fragment() {
         viewModel.stations.observe(viewLifecycleOwner, {
             this.stationList.clear()
             this.stationList.addAll(stationConverter.convertStations(it.payload))
-            this.stationList.add(SavableStation("test", "test", "test"))
             this.searchAdapter.notifyDataSetChanged()
         })
     }

@@ -16,12 +16,12 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 data class Notes (
 
-		@SerializedName("value") val value : String,
-		@SerializedName("key") val key : String,
-		@SerializedName("noteType") val noteType : String,
-		@SerializedName("priority") val priority : Int,
-		@SerializedName("routeIdxFrom") val routeIdxFrom : Int,
-		@SerializedName("routeIdxTo") val routeIdxTo : Int,
-		@SerializedName("isPresentationRequired") val isPresentationRequired : Boolean,
-		@SerializedName("category") val category : String
+		@SerializedName("value") val value : String?,
+		@SerializedName("key") val key : String?,
+		@SerializedName("noteType") val noteType : String?,
+		@SerializedName("priority") val priority : Int?,
+		@SerializedName("routeIdxFrom") val routeIdxFrom : Int?,
+		@SerializedName("routeIdxTo") val routeIdxTo : Int?,
+		@SerializedName("isPresentationRequired") val isPresentationRequired : Boolean?,
+		@SerializedName("category") val category : String?
 )
