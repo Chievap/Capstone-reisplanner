@@ -21,4 +21,7 @@
     <string name="arrow">arrow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="departure">Departure</string>
+    <string name="arrival">Arrival</string>
+    <string name="activate">Activate</string>
 </resources>
