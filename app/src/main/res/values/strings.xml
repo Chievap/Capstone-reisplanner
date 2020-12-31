@@ -14,4 +14,9 @@
     <string name="to">To:</string>
     <string name="search">Search</string>
     <string name="divider"> <![CDATA[ -> ]]> </string>
+    <string name="transfers">Transfers: </string>
+    <string name="travel_duration">travel_duration</string>
+    <string name="arrival_time">arrival_time</string>
+    <string name="departure_time">departure_time</string>
+    <string name="arrow">arrow</string>
 </resources>

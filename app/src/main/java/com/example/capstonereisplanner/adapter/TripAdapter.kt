@@ -44,6 +44,7 @@ RecyclerView.Adapter<TripAdapter.ViewHolder>() {
             itemRoute.tvDeparture.text = trip.departureTime
             itemRoute.tvArrival.text = trip.arrivalTime
             itemRoute.tvTransfers.text = trip.transfers.toString()
+            itemRoute.tvTime.text = trip.plannedDurationInMinutes.toString()
         }
     }
 }
