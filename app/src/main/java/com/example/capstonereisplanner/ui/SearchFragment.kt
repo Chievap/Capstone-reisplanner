@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonereisplanner.R
 import com.example.capstonereisplanner.adapter.TripAdapter
 import com.example.capstonereisplanner.converter.TripConverter
 import com.example.capstonereisplanner.databinding.FragmentSearchBinding
@@ -49,7 +51,7 @@ class SearchFragment : Fragment() {
 
         mRecyclerView = binding.rc
 
-        adapter = TripAdapter(tripList)
+        adapter = TripAdapter(tripList, this::onClick)
 
         mRecyclerView.adapter = adapter
 
@@ -76,5 +78,9 @@ class SearchFragment : Fragment() {
             this.tripList.addAll(tripConverter.convertTrips(it))
             this.adapter.notifyDataSetChanged()
         })
+    }
+
+    private fun onClick(savableTrip: SavableTrip){
+        findNavController().navigate(R.id.action_SecondFragment_to_routeFragment)
     }
 }

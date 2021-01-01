@@ -8,10 +8,10 @@ import com.example.capstonereisplanner.databinding.ItemRouteBinding
 import com.example.capstonereisplanner.entity.SavableTrip
 
 class TripAdapter(
-    private val trips: List<SavableTrip>
-// private val onClick: (SavableStation) -> Unit
-):
-RecyclerView.Adapter<TripAdapter.ViewHolder>() {
+    private val trips: List<SavableTrip>,
+    private val onClick: (SavableTrip) -> Unit
+) :
+    RecyclerView.Adapter<TripAdapter.ViewHolder>() {
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -35,8 +35,7 @@ RecyclerView.Adapter<TripAdapter.ViewHolder>() {
 
         init {
             itemRoute.root.setOnClickListener {
-                // onClick(stationList[adapterPosition])
-                println("Clicken on trip")
+                onClick(trips[adapterPosition])
             }
         }
 

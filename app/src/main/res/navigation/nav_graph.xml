@@ -30,14 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/routeFragment"
-        android:name="com.example.capstonereisplanner.RouteFragment"
+        android:name="com.example.capstonereisplanner.ui.RouteFragment"
         android:label="fragment_route"
-        tools:layout="@layout/fragment_route" >
-        <action
-            android:id="@+id/action_routeFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_routeFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_route" />
 </navigation>
