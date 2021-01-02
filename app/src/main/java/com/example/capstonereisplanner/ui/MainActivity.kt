@@ -1,16 +1,14 @@
 package com.example.capstonereisplanner.ui
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import com.example.capstonereisplanner.R
-import com.example.capstonereisplanner.viewmodel.StationViewModel
-import com.example.capstonereisplanner.viewmodel.TripViewModel
+import kotlinx.android.synthetic.main.fragment_route.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,11 +25,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        val navController = findNavController(R.id.statisticsFragment)
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.statisticsFragment -> item.onNavDestinationSelected(navController)
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -19,11 +19,15 @@
     <string name="arrival_time">arrival_time</string>
     <string name="departure_time">departure_time</string>
     <string name="arrow">arrow</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="departure">Departure</string>
     <string name="arrival">Arrival</string>
     <string name="activate">Activate</string>
     <string name="saveIcon">SaveIcon</string>
     <string name="track">Track: </string>
+    <string name="statistics">Statistics</string>
+    <string name="hours_traveled">Hours traveled: </string>
+    <string name="most_visited_station">Most visited station: </string>
+    <string name="most_traveled">Most traveled: </string>
+    <string name="history">History</string>
 </resources>
