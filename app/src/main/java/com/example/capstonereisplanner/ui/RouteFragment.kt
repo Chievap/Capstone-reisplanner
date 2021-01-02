@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonereisplanner.adapter.RouteAdapter
 import com.example.capstonereisplanner.databinding.FragmentRouteBinding
 import com.example.capstonereisplanner.entity.SavableStationRoute
+import com.example.capstonereisplanner.entity.SavableTrip
+import com.example.capstonereisplanner.viewmodel.RouteViewModel
 
 
 const val FROM_STATION_ROUTE_NAME = "from_station_route_name"
@@ -22,8 +25,14 @@ class RouteFragment : Fragment() {
     private lateinit var binding: FragmentRouteBinding
     private lateinit var adapter: RouteAdapter
     private lateinit var mRecyclerView: RecyclerView
+    private val viewModel: RouteViewModel by viewModels()
 
     private var stationRoutes = arrayListOf<SavableStationRoute>()
+
+    var fromStationName = ""
+    var fromStationTime = ""
+    var toStationName = ""
+    var toStationTime = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +45,13 @@ class RouteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fromStationName = arguments?.getString(FROM_STATION_ROUTE_NAME)
-        val fromStationTime = arguments?.getString(TO_STATION_ROUTE_TIME)
-        val toStationName =  arguments?.getString(TO_STATION_ROUTE_NAME)
-        val toStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME)
+        fromStationName = arguments?.getString(FROM_STATION_ROUTE_NAME).toString()
+        fromStationTime= arguments?.getString(TO_STATION_ROUTE_TIME).toString()
+        toStationName = arguments?.getString(TO_STATION_ROUTE_NAME).toString()
+        toStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME).toString()
+
+
+
         adapter = RouteAdapter(stationRoutes)
 
         mRecyclerView = binding.rcStations
@@ -53,9 +65,15 @@ class RouteFragment : Fragment() {
         binding.tvArrivalTime.text = toStationTime
         binding.tvDepartureTime.text = fromStationTime
 
-        stationRoutes.add(SavableStationRoute(fromStationName.toString(),"4"))
-        stationRoutes.add(SavableStationRoute(toStationName.toString(),"6"))
+        binding.bActivate.setOnClickListener { onActivateClick() }
+
+        stationRoutes.add(SavableStationRoute(fromStationName.toString(), "4"))
+        stationRoutes.add(SavableStationRoute(toStationName.toString(), "6"))
         adapter.notifyDataSetChanged()
 
+    }
+
+    private fun onActivateClick() {
+        viewModel.saveTrip(SavableTrip(60,0,fromStationName,fromStationTime,toStationTime,5,toStationName,false))
     }
 }
