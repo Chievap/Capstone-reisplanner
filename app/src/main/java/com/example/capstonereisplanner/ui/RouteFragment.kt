@@ -36,7 +36,10 @@ class RouteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val fromStationName = arguments?.getString(FROM_STATION_ROUTE_NAME)
+        val fromStationTime = arguments?.getString(TO_STATION_ROUTE_TIME)
+        val toStationName =  arguments?.getString(TO_STATION_ROUTE_NAME)
+        val toStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME)
         adapter = RouteAdapter(stationRoutes)
 
         mRecyclerView = binding.rcStations
@@ -45,10 +48,14 @@ class RouteFragment : Fragment() {
         mRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-        binding.tvFrom.text = arguments?.getString(FROM_STATION_ROUTE_NAME)
-        binding.tvTo.text = arguments?.getString(TO_STATION_ROUTE_NAME)
-        binding.tvArrivalTime.text = arguments?.getString(TO_STATION_ROUTE_TIME)
-        binding.tvDepartureTime.text = arguments?.getString(FROM_STATION_ROUTE_TIME)
+        binding.tvFrom.text = fromStationName
+        binding.tvTo.text = toStationName
+        binding.tvArrivalTime.text = toStationTime
+        binding.tvDepartureTime.text = fromStationTime
+
+        stationRoutes.add(SavableStationRoute(fromStationName.toString(),"4"))
+        stationRoutes.add(SavableStationRoute(toStationName.toString(),"6"))
+        adapter.notifyDataSetChanged()
 
     }
 }

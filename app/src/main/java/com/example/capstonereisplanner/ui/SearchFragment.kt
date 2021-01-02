@@ -78,7 +78,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun onClick(savableTrip: SavableTrip){
-        var args = Bundle()
+        val args = Bundle()
         args.putString(FROM_STATION_ROUTE_NAME,savableTrip.fromName)
         args.putString(FROM_STATION_ROUTE_TIME,savableTrip.departureTime)
         args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
