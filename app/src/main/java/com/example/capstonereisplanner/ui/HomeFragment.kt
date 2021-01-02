@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
         mRecyclerView = binding.listView
 
         binding.bSearch.setOnClickListener { navigateToSearch() }
+        binding.ivStatistics.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_statisticsFragment) }
 
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.adapter = searchAdapter

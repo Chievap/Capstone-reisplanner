@@ -197,6 +197,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.73" />
 
+        <ImageButton
+            android:id="@+id/ib_statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_to"
+            app:layout_constraintEnd_toEndOf="@+id/tv_from"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13"
+            app:srcCompat="@drawable/ic_baseline_settings_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

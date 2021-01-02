@@ -52,14 +52,14 @@ class SearchFragment : Fragment() {
         mRecyclerView = binding.rc
 
         adapter = TripAdapter(tripList, this::onClick)
-
         mRecyclerView.adapter = adapter
-
         mRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
+        binding.ivStatistic.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_statisticsFragment) }
+
         if (fromCode != null && toCode != null) {
-                viewModel.getTrip(fromCode, toCode)
+            viewModel.getTrip(fromCode, toCode)
         }
 
         binding.tvFrom.text = arguments?.getString(FROM_STATION_NAME)
@@ -69,7 +69,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeTrips() {
-        viewModel.trip.observe(viewLifecycleOwner,{
+        viewModel.trip.observe(viewLifecycleOwner, {
             this.tripList.clear()
             println(it.trips)
             this.tripList.addAll(tripConverter.convertTrips(it))
@@ -77,12 +77,12 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun onClick(savableTrip: SavableTrip){
+    private fun onClick(savableTrip: SavableTrip) {
         val args = Bundle()
-        args.putString(FROM_STATION_ROUTE_NAME,savableTrip.fromName)
-        args.putString(FROM_STATION_ROUTE_TIME,savableTrip.departureTime)
+        args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)
+        args.putString(FROM_STATION_ROUTE_TIME, savableTrip.departureTime)
         args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
         args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
-        findNavController().navigate(R.id.action_SecondFragment_to_routeFragment,args)
+        findNavController().navigate(R.id.action_SecondFragment_to_routeFragment, args)
     }
 }

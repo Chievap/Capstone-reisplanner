@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.capstonereisplanner.StatisticsFragment"
+        android:name="com.example.capstonereisplanner.ui.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
 </navigation>

@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonereisplanner.R
 import com.example.capstonereisplanner.adapter.RouteAdapter
 import com.example.capstonereisplanner.databinding.FragmentRouteBinding
 import com.example.capstonereisplanner.entity.SavableStationRoute
 import com.example.capstonereisplanner.entity.SavableTrip
 import com.example.capstonereisplanner.viewmodel.RouteViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 const val FROM_STATION_ROUTE_NAME = "from_station_route_name"
@@ -50,7 +53,7 @@ class RouteFragment : Fragment() {
         toStationName = arguments?.getString(TO_STATION_ROUTE_NAME).toString()
         toStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME).toString()
 
-
+        binding.ibStatistics.setOnClickListener{findNavController().navigate(R.id.action_routeFragment_to_statisticsFragment)}
 
         adapter = RouteAdapter(stationRoutes)
 
@@ -75,5 +78,6 @@ class RouteFragment : Fragment() {
 
     private fun onActivateClick() {
         viewModel.saveTrip(SavableTrip(60,0,fromStationName,fromStationTime,toStationTime,5,toStationName,false))
+        Snackbar.make(binding.view,"Trip now activated",Snackbar.LENGTH_SHORT).show()
     }
 }
