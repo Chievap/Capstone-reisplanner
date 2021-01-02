@@ -62,9 +62,6 @@ class SearchFragment : Fragment() {
                 viewModel.getTrip(fromCode, toCode)
         }
 
-        println(arguments?.getString(FROM_STATION_CODE))
-        println(arguments?.getString(TO_STATION_CODE))
-
         binding.tvFrom.text = arguments?.getString(FROM_STATION_NAME)
         binding.tvTo.text = arguments?.getString(TO_STATION_NAME)
 
@@ -81,6 +78,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun onClick(savableTrip: SavableTrip){
-        findNavController().navigate(R.id.action_SecondFragment_to_routeFragment)
+        var args = Bundle()
+        args.putString(FROM_STATION_ROUTE_NAME,savableTrip.fromName)
+        args.putString(FROM_STATION_ROUTE_TIME,savableTrip.departureTime)
+        args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
+        args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
+        findNavController().navigate(R.id.action_SecondFragment_to_routeFragment,args)
     }
 }

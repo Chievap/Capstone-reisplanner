@@ -68,7 +68,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tv_departure_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/departure_time" />
@@ -80,7 +80,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/tv_arrival_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/arrival_time" />
@@ -127,6 +127,7 @@
     </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_stations"
         android:layout_width="411dp"
         android:layout_height="207dp"
         app:layout_constraintBottom_toBottomOf="parent"
