@@ -5,13 +5,17 @@ import com.example.capstonereisplanner.entity.SavableStation
 
 class StationConverter {
     private fun convertStation(station: Payload): SavableStation {
-        return SavableStation(name = station.namen.lang,country = station.land,code = station.code)
+        return SavableStation(
+            name = station.namen.lang,
+            country = station.land,
+            code = station.code
+        )
     }
 
-    fun convertStations(stations: List<Payload>): List<SavableStation>{
+    fun convertStations(stations: List<Payload>): List<SavableStation> {
         val savableStations = mutableListOf<SavableStation>()
 
-        for (payload in stations){
+        for (payload in stations) {
             savableStations.add(convertStation(payload))
         }
         return savableStations

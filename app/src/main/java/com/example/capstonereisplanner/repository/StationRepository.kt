@@ -15,7 +15,7 @@ class StationRepository {
 
     val stations: LiveData<StationResult> get() = _stations
 
-    suspend fun getStations(){
+    suspend fun getStations() {
         val stationList = stationApiService.getStations()
         _stations.value = stationList
     }

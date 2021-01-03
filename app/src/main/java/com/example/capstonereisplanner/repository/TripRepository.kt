@@ -12,7 +12,7 @@ class TripRepository {
 
     val trip: LiveData<Trip> get() = _trip
 
-    suspend fun getTrip(fromStation: String, toStation: String){
+    suspend fun getTrip(fromStation: String, toStation: String) {
         val trip = tripApiService.getTrip(fromStation, toStation)
         _trip.value = trip
     }

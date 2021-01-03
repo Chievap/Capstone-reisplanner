@@ -8,22 +8,26 @@ class TripConverter {
     fun convertTrips(trip: Trip): List<SavableTrip> {
         val savableTrips = mutableListOf<SavableTrip>()
         for (trips in trip.trips) {
-            savableTrips.add(SavableTrip(trips.actualDurationInMinutes,
+            savableTrips.add(
+                SavableTrip(
+                    trips.actualDurationInMinutes,
                     trips.transfers,
                     trips.legs[0].origin.name,
                     trimDateTimeToTime(trips.legs[0].origin.plannedDateTime),
                     trimDateTimeToTime(trips.legs[0].destination.plannedDateTime),
                     trips.legs[0].stops.size,
-                    trips.legs[0].destination.name,
+                    trips.legs[trips.legs.size - 1].destination.name,
                     checkCancelled(trips.legs),
                     trips.legs[0].origin.actualTrack,
-                    trips.legs[0].destination.actualTrack))
+                    trips.legs[trips.legs.size - 1].destination.actualTrack
+                )
+            )
         }
 
         return savableTrips
     }
 
-    private fun trimDateTimeToTime(_date: String):String{
+    private fun trimDateTimeToTime(_date: String): String {
         return Regex("(?<=T)(.*?)(?=\\+)").find(_date)!!.value.dropLast(3)
     }
 

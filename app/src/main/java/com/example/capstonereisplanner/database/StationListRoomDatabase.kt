@@ -8,7 +8,7 @@ import com.example.capstonereisplanner.dao.StationDao
 import com.example.capstonereisplanner.entity.SavableStation
 
 @Database(entities = [SavableStation::class], version = 1, exportSchema = false)
-abstract class StationListRoomDatabase: RoomDatabase() {
+abstract class StationListRoomDatabase : RoomDatabase() {
 
     abstract fun stationDao(): StationDao
 

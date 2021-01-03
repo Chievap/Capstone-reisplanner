@@ -38,10 +38,11 @@ class SearchAdapter(
         RecyclerView.ViewHolder(itemStation.root) {
 
         init {
-            itemStation.root.setOnClickListener{
+            itemStation.root.setOnClickListener {
                 onClick(stationList[adapterPosition])
             }
         }
+
         fun bind(station: SavableStation) {
             itemStation.tvName.text = station.name
         }

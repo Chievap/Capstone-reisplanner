@@ -15,15 +15,15 @@ class SavableStationRepository(context: Context) {
         stationDao = database!!.stationDao()
     }
 
-    fun getStationList(): List<SavableStation>{
+    fun getStationList(): List<SavableStation> {
         return stationDao.getAllStations()
     }
 
-    suspend fun insertStation(savableStation: SavableStation){
+    suspend fun insertStation(savableStation: SavableStation) {
         stationDao.insertStation(savableStation)
     }
 
-    suspend fun deleteAllStations(){
+    suspend fun deleteAllStations() {
         stationDao.deleteAllStations()
     }
 

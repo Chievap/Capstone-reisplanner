@@ -15,15 +15,15 @@ class SavableTripRepository(context: Context) {
         tripDao = database!!.tripDao()
     }
 
-    fun getTripList(): LiveData<List<SavableTrip>>{
+    fun getTripList(): LiveData<List<SavableTrip>> {
         return tripDao.getAllTrips()
     }
 
-    suspend fun insertTrip(trip: SavableTrip){
+    suspend fun insertTrip(trip: SavableTrip) {
         tripDao.insertTrip(trip)
     }
 
-    suspend fun deleteAllTrips(){
+    suspend fun deleteAllTrips() {
         tripDao.deleteAllTrips()
     }
 }

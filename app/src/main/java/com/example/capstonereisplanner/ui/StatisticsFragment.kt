@@ -116,7 +116,7 @@ class StatisticsFragment : Fragment() {
     private fun getHoursTraveled(trips: List<SavableTrip>): String {
         var totalTime = 0
 
-        for(trip in trips){
+        for (trip in trips) {
             totalTime += trip.plannedDurationInMinutes
         }
 
@@ -126,8 +126,8 @@ class StatisticsFragment : Fragment() {
         return makeTwoDigits(hours).plus(":").plus(makeTwoDigits(minutes))
     }
 
-    private fun makeTwoDigits(number: Int):String{
-        if(number.toString().trim().length == 1){
+    private fun makeTwoDigits(number: Int): String {
+        if (number.toString().trim().length == 1) {
             return "0".plus(number.toString())
         }
         return number.toString()

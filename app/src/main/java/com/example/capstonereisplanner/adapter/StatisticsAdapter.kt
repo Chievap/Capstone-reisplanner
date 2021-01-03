@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonereisplanner.databinding.ItemTripHistoryBinding
 import com.example.capstonereisplanner.entity.SavableTrip
 
-class StatisticsAdapter(private val tripList: List<SavableTrip>):
+class StatisticsAdapter(private val tripList: List<SavableTrip>) :
     RecyclerView.Adapter<StatisticsAdapter.ViewHolder>() {
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

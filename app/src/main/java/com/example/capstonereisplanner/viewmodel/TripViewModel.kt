@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.capstonereisplanner.repository.TripRepository
 import kotlinx.coroutines.launch
 
-class TripViewModel: ViewModel() {
+class TripViewModel : ViewModel() {
 
     private val tripRepository = TripRepository()
 
