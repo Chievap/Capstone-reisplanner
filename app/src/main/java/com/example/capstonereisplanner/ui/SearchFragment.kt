@@ -71,7 +71,6 @@ class SearchFragment : Fragment() {
     private fun observeTrips() {
         viewModel.trip.observe(viewLifecycleOwner, {
             this.tripList.clear()
-            println(it.trips)
             this.tripList.addAll(tripConverter.convertTrips(it))
             this.adapter.notifyDataSetChanged()
         })
@@ -81,8 +80,11 @@ class SearchFragment : Fragment() {
         val args = Bundle()
         args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)
         args.putString(FROM_STATION_ROUTE_TIME, savableTrip.departureTime)
+        args.putInt(FROM_STATION_ROUTE_TRACK,savableTrip.fromTrack)
         args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
         args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
+        args.putInt(TO_STATION_ROUTE_TRACK, savableTrip.toTrack)
+        args.putInt(TRAVEL_TIME,savableTrip.plannedDurationInMinutes)
         findNavController().navigate(R.id.action_SecondFragment_to_routeFragment, args)
     }
 }

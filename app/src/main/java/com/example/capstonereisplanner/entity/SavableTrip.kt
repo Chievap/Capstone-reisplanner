@@ -13,6 +13,8 @@ class SavableTrip(
         val fromStops: Int,
         val destinationName: String,
         val cancelled: Boolean,
+        val fromTrack: Int,
+        val toTrack: Int,
         @PrimaryKey(autoGenerate = true)
         val id: Long? = null,
 )

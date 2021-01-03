@@ -20,8 +20,11 @@ import com.google.android.material.snackbar.Snackbar
 
 const val FROM_STATION_ROUTE_NAME = "from_station_route_name"
 const val FROM_STATION_ROUTE_TIME = "from_station_route_time"
+const val FROM_STATION_ROUTE_TRACK = "from_station_route_track"
 const val TO_STATION_ROUTE_NAME = "to_station_route_name"
 const val TO_STATION_ROUTE_TIME = "to_station_route_time"
+const val TO_STATION_ROUTE_TRACK = "to_station_route_track"
+const val TRAVEL_TIME = "travel_time"
 
 class RouteFragment : Fragment() {
 
@@ -32,10 +35,13 @@ class RouteFragment : Fragment() {
 
     private var stationRoutes = arrayListOf<SavableStationRoute>()
 
-    var fromStationName = ""
-    var fromStationTime = ""
-    var toStationName = ""
-    var toStationTime = ""
+    private var fromStationName = ""
+    private var fromStationTime = ""
+    private var fromStationTrack = 0
+    private var toStationName = ""
+    private var toStationTime = ""
+    private var toStationTrack = 0
+    private var travelTime = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +55,14 @@ class RouteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fromStationName = arguments?.getString(FROM_STATION_ROUTE_NAME).toString()
-        fromStationTime= arguments?.getString(TO_STATION_ROUTE_TIME).toString()
+        fromStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME).toString()
+        fromStationTrack = requireArguments().getInt(FROM_STATION_ROUTE_TRACK)
         toStationName = arguments?.getString(TO_STATION_ROUTE_NAME).toString()
-        toStationTime = arguments?.getString(FROM_STATION_ROUTE_TIME).toString()
+        toStationTime = arguments?.getString(TO_STATION_ROUTE_TIME).toString()
+        toStationTrack = requireArguments().getInt(TO_STATION_ROUTE_TRACK)
+        travelTime = requireArguments().getInt(TRAVEL_TIME)
 
-        binding.ibStatistics.setOnClickListener{findNavController().navigate(R.id.action_routeFragment_to_statisticsFragment)}
+        binding.ibStatistics.setOnClickListener { findNavController().navigate(R.id.action_routeFragment_to_statisticsFragment) }
 
         adapter = RouteAdapter(stationRoutes)
 
@@ -70,14 +79,27 @@ class RouteFragment : Fragment() {
 
         binding.bActivate.setOnClickListener { onActivateClick() }
 
-        stationRoutes.add(SavableStationRoute(fromStationName.toString(), "4"))
-        stationRoutes.add(SavableStationRoute(toStationName.toString(), "6"))
+        stationRoutes.add(SavableStationRoute(fromStationName, fromStationTrack.toString()))
+        stationRoutes.add(SavableStationRoute(toStationName, toStationTrack.toString()))
         adapter.notifyDataSetChanged()
 
     }
 
     private fun onActivateClick() {
-        viewModel.saveTrip(SavableTrip(60,0,fromStationName,fromStationTime,toStationTime,5,toStationName,false))
-        Snackbar.make(binding.view,"Trip now activated",Snackbar.LENGTH_SHORT).show()
+        viewModel.saveTrip(
+            SavableTrip(
+                travelTime,
+                0,
+                fromStationName,
+                fromStationTime,
+                toStationTime,
+                5,
+                toStationName,
+                false,
+                fromStationTrack,
+                toStationTrack
+            )
+        )
+        Snackbar.make(binding.view, "Trip now activated", Snackbar.LENGTH_SHORT).show()
     }
 }

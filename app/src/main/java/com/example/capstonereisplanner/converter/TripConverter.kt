@@ -1,14 +1,8 @@
 package com.example.capstonereisplanner.converter
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.capstonereisplanner.entity.SavableTrip
 import com.example.capstonereisplanner.model.Trip
 import com.example.capstonereisplanner.model.tripDetail.Legs
-import com.example.capstonereisplanner.model.tripDetail.Trips
-import java.text.DateFormat
-import java.time.LocalDateTime
-import java.util.*
 
 class TripConverter {
     fun convertTrips(trip: Trip): List<SavableTrip> {
@@ -17,17 +11,19 @@ class TripConverter {
             savableTrips.add(SavableTrip(trips.actualDurationInMinutes,
                     trips.transfers,
                     trips.legs[0].origin.name,
-                    trimDataTimeToTime(trips.legs[0].origin.plannedDateTime),
-                    trimDataTimeToTime(trips.legs[0].destination.plannedDateTime),
+                    trimDateTimeToTime(trips.legs[0].origin.plannedDateTime),
+                    trimDateTimeToTime(trips.legs[0].destination.plannedDateTime),
                     trips.legs[0].stops.size,
                     trips.legs[0].destination.name,
-                    checkCancelled(trips.legs)))
+                    checkCancelled(trips.legs),
+                    trips.legs[0].origin.actualTrack,
+                    trips.legs[0].destination.actualTrack))
         }
 
         return savableTrips
     }
 
-    private fun trimDataTimeToTime(_date: String):String{
+    private fun trimDateTimeToTime(_date: String):String{
         return Regex("(?<=T)(.*?)(?=\\+)").find(_date)!!.value.dropLast(3)
     }
 
