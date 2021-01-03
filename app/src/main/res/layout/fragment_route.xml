@@ -7,8 +7,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_width="411dp"
+        android:layout_height="490dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +92,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/id_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -116,6 +117,19 @@
                     android:src="@drawable/ic_baseline_save" />
 
                 <View
+                    android:id="@+id/view19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/b_view_on_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@string/view_on_map" />
+
+                <View
                     android:id="@+id/view11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,12 +141,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_stations"
-        android:layout_width="411dp"
-        android:layout_height="207dp"
+        android:layout_width="409dp"
+        android:layout_height="406dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -175,7 +189,7 @@
             android:id="@+id/tv_to"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/station"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +202,7 @@
             android:id="@+id/tv_from"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/station"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -207,7 +221,8 @@
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.13"
-            app:srcCompat="@drawable/ic_baseline_settings_24" />
+            app:srcCompat="@drawable/ic_baseline_settings_24"
+            android:contentDescription="@string/settings_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

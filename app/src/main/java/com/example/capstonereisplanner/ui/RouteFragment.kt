@@ -1,5 +1,6 @@
 package com.example.capstonereisplanner.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -65,6 +66,12 @@ class RouteFragment : Fragment() {
         travelTime = requireArguments().getInt(TRAVEL_TIME)
 
         binding.ibStatistics.setOnClickListener { findNavController().navigate(R.id.action_routeFragment_to_statisticsFragment) }
+        binding.bViewOnMap.setOnClickListener {
+            val intent = Intent(context, MapsActivity::class.java)
+            startActivity(intent)
+        }
+        binding.bViewOnMap.isEnabled = false
+        binding.bViewOnMap.isClickable = false
 
         adapter = RouteAdapter(stationRoutes)
 
@@ -105,6 +112,8 @@ class RouteFragment : Fragment() {
             savableTrip
         )
         activeTripViewModel.saveTrip(savableTrip)
+        binding.bViewOnMap.isEnabled = true
+        binding.bViewOnMap.isClickable = true
         Snackbar.make(binding.view, "Trip now activated", Snackbar.LENGTH_SHORT).show()
     }
 }

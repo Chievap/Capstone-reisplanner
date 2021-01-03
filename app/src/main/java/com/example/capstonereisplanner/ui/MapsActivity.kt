@@ -2,7 +2,15 @@ package com.example.capstonereisplanner.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.example.capstonereisplanner.R
+import com.example.capstonereisplanner.entity.SavableStation
+import com.example.capstonereisplanner.entity.SavableTrip
+import com.example.capstonereisplanner.model.StationResult
+import com.example.capstonereisplanner.model.stationDetail.Payload
+import com.example.capstonereisplanner.viewmodel.ActiveTripViewModel
+import com.example.capstonereisplanner.viewmodel.StationViewModel
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,14 +18,23 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
+import kotlin.collections.HashMap
 
+const val ZOOM_LEVEL = 7.0
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private val activeTripViewModel: ActiveTripViewModel by viewModels()
+    private val stationViewModel: StationViewModel by viewModels()
+    private lateinit var currentTrip: List<SavableTrip>
+    private lateinit var stationList: StationResult
+    private var markers: HashMap<String, LatLng> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+        stationViewModel.getStations()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -36,9 +53,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        stationViewModel.stations.observe(this, {
+            stationList = it
+            if (this::stationList.isInitialized && this::currentTrip.isInitialized) {
+                addMarkers(mMap)
+            }
+
+        })
+
+        activeTripViewModel.trips.observe(this, {
+            currentTrip = it
+
+            if (this::stationList.isInitialized && this::currentTrip.isInitialized) {
+                addMarkers(mMap)
+            }
+        })
+    }
+
+    private fun addMarkers(mMap: GoogleMap) {
+        val long = arrayListOf<Double>()
+        val lat = arrayListOf<Double>()
+        for (payload: Payload in stationList.payload) {
+            if (payload.namen.lang == currentTrip[0].fromName || payload.namen.lang == currentTrip[0].destinationName) {
+                val marker = LatLng(payload.lat, payload.lng)
+                long.add(payload.lng)
+                lat.add(payload.lat)
+                markers[payload.namen.lang] = marker
+            }
+        }
+        for (entry: MutableMap.MutableEntry<String, LatLng> in markers) {
+            mMap.addMarker(MarkerOptions().position(entry.value).title(entry.key))
+        }
+        mMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                calculateAndMoveCamera(
+                    long[0],
+                    lat[0], long[1], lat[1]
+                ), ZOOM_LEVEL.toFloat()
+            )
+        )
+    }
+
+    private fun calculateAndMoveCamera(
+        long1: Double,
+        lat1: Double,
+        long2: Double,
+        lat2: Double
+    ): LatLng {
+        return LatLng((lat1 + lat2) / 2, (long1 + long2) / 2)
     }
 }

@@ -31,4 +31,6 @@
     <string name="most_traveled">Most traveled: </string>
     <string name="history">History</string>
     <string name="title_activity_maps">Map</string>
+    <string name="view_on_map">View on map</string>
+    <string name="settings_button">Settings button</string>
 </resources>
