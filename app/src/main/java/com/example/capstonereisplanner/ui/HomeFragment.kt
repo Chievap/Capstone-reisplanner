@@ -130,14 +130,15 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun observeActiveTrip(){
-        activeTripViewModel.trips.observe(viewLifecycleOwner,{ it:List<SavableTrip> ->
-            if(it.isNotEmpty()) {
+    private fun observeActiveTrip() {
+        activeTripViewModel.trips.observe(viewLifecycleOwner, { it: List<SavableTrip> ->
+            if (it.isNotEmpty()) {
                 val savableTrip = it[0]
                 binding.activeRoute.tvFromActive.text = savableTrip.fromName
                 binding.activeRoute.tvToActive.text = savableTrip.destinationName
                 binding.activeRoute.activeGroup.visibility = View.VISIBLE
-                binding.activeRoute.cl.setOnClickListener { val args = Bundle()
+                binding.activeRoute.cl.setOnClickListener {
+                    val args = Bundle()
                     args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)
                     args.putString(FROM_STATION_ROUTE_TIME, savableTrip.departureTime)
                     args.putInt(FROM_STATION_ROUTE_TRACK, savableTrip.fromTrack)
@@ -145,9 +146,7 @@ class HomeFragment : Fragment() {
                     args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
                     args.putInt(TO_STATION_ROUTE_TRACK, savableTrip.toTrack)
                     args.putInt(TRAVEL_TIME, savableTrip.plannedDurationInMinutes)
-                    findNavController().navigate(R.id.action_FirstFragment_to_routeFragment, args) }
-                binding.activeRoute.activeGroup.setOnClickListener{
-
+                    findNavController().navigate(R.id.action_FirstFragment_to_routeFragment, args)
                 }
             }
         })
