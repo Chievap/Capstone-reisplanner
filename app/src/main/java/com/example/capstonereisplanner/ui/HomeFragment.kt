@@ -17,6 +17,8 @@ import com.example.capstonereisplanner.adapter.SearchAdapter
 import com.example.capstonereisplanner.converter.StationConverter
 import com.example.capstonereisplanner.databinding.FragmentHomeBinding
 import com.example.capstonereisplanner.entity.SavableStation
+import com.example.capstonereisplanner.entity.SavableTrip
+import com.example.capstonereisplanner.viewmodel.ActiveTripViewModel
 import com.example.capstonereisplanner.viewmodel.StationViewModel
 import java.util.*
 
@@ -25,6 +27,7 @@ import java.util.*
  */
 class HomeFragment : Fragment() {
     private val viewModel: StationViewModel by viewModels()
+    private val activeTripViewModel: ActiveTripViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mSearchTextFrom: EditText
@@ -40,7 +43,6 @@ class HomeFragment : Fragment() {
     private val stationSuggestions = arrayListOf<SavableStation>()
     private val stationConverter = StationConverter()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,8 +56,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         searchAdapter = SearchAdapter(stationSuggestions, this::onStationClick)
+        stationSuggestions.clear()
+        searchAdapter.notifyDataSetChanged()
         mSearchTextFrom = binding.searchTextFrom
         changeStationSearch = mSearchTextFrom
         mSearchTextTo = binding.searchTextTo
@@ -63,6 +66,7 @@ class HomeFragment : Fragment() {
 
         binding.bSearch.setOnClickListener { navigateToSearch() }
         binding.ivStatistics.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_statisticsFragment) }
+        binding.activeRoute.activeGroup.visibility = View.GONE
 
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.adapter = searchAdapter
@@ -105,7 +109,7 @@ class HomeFragment : Fragment() {
         })
 
         observeStations()
-
+        observeActiveTrip()
     }
 
     private fun filterSuggestions(searchTerm: String) {
@@ -123,6 +127,28 @@ class HomeFragment : Fragment() {
             this.stationList.clear()
             this.stationList.addAll(stationConverter.convertStations(it.payload))
             this.searchAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun observeActiveTrip(){
+        activeTripViewModel.trips.observe(viewLifecycleOwner,{ it:List<SavableTrip> ->
+            if(it.isNotEmpty()) {
+                val savableTrip = it[0]
+                binding.activeRoute.tvFromActive.text = savableTrip.fromName
+                binding.activeRoute.tvToActive.text = savableTrip.destinationName
+                binding.activeRoute.activeGroup.visibility = View.VISIBLE
+                binding.activeRoute.activeGroup.setOnClickListener{
+                    val args = Bundle()
+                    args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)
+                    args.putString(FROM_STATION_ROUTE_TIME, savableTrip.departureTime)
+                    args.putInt(FROM_STATION_ROUTE_TRACK, savableTrip.fromTrack)
+                    args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
+                    args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
+                    args.putInt(TO_STATION_ROUTE_TRACK, savableTrip.toTrack)
+                    args.putInt(TRAVEL_TIME, savableTrip.plannedDurationInMinutes)
+                    findNavController().navigate(R.id.action_SecondFragment_to_routeFragment, args)
+                }
+            }
         })
     }
 

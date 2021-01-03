@@ -111,9 +111,9 @@ class RouteFragment : Fragment() {
         viewModel.saveTrip(
             savableTrip
         )
-        activeTripViewModel.saveTrip(savableTrip)
         binding.bViewOnMap.isEnabled = true
         binding.bViewOnMap.isClickable = true
         Snackbar.make(binding.view, "Trip now activated", Snackbar.LENGTH_SHORT).show()
+        activeTripViewModel.saveTrip(savableTrip)
     }
 }

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <include
+        android:id="@+id/active_route"
+        layout="@layout/item_active_route"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
@@ -23,6 +25,7 @@
             android:id="@+id/searchTextFrom"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/station"
             android:inputType="textPersonName"
@@ -31,13 +34,13 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.71000004"
-            android:autofillHints="" />
+            app:layout_constraintVertical_bias="0.71000004" />
 
         <EditText
             android:id="@+id/searchTextTo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/station"
             android:inputType="textPersonName"
@@ -46,8 +49,7 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.68"
-            android:autofillHints=""/>
+            app:layout_constraintVertical_bias="0.68" />
 
         <TextView
             android:id="@+id/textView"
@@ -101,8 +103,10 @@
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toTopOf="@+id/searchTextFrom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_baseline_settings_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
