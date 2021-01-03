@@ -14,6 +14,7 @@ import com.example.capstonereisplanner.adapter.RouteAdapter
 import com.example.capstonereisplanner.databinding.FragmentRouteBinding
 import com.example.capstonereisplanner.entity.SavableStationRoute
 import com.example.capstonereisplanner.entity.SavableTrip
+import com.example.capstonereisplanner.viewmodel.ActiveTripViewModel
 import com.example.capstonereisplanner.viewmodel.RouteViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -32,6 +33,7 @@ class RouteFragment : Fragment() {
     private lateinit var adapter: RouteAdapter
     private lateinit var mRecyclerView: RecyclerView
     private val viewModel: RouteViewModel by viewModels()
+    private val activeTripViewModel: ActiveTripViewModel by viewModels()
 
     private var stationRoutes = arrayListOf<SavableStationRoute>()
 
@@ -86,20 +88,23 @@ class RouteFragment : Fragment() {
     }
 
     private fun onActivateClick() {
-        viewModel.saveTrip(
-            SavableTrip(
-                travelTime,
-                0,
-                fromStationName,
-                fromStationTime,
-                toStationTime,
-                5,
-                toStationName,
-                false,
-                fromStationTrack,
-                toStationTrack
-            )
+        val savableTrip = SavableTrip(
+            travelTime,
+            0,
+            fromStationName,
+            fromStationTime,
+            toStationTime,
+            5,
+            toStationName,
+            false,
+            fromStationTrack,
+            toStationTrack
         )
+        activeTripViewModel.deleteTrips()
+        viewModel.saveTrip(
+            savableTrip
+        )
+        activeTripViewModel.saveTrip(savableTrip)
         Snackbar.make(binding.view, "Trip now activated", Snackbar.LENGTH_SHORT).show()
     }
 }

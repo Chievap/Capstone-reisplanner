@@ -10,8 +10,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="station">Station</string>
-    <string name="from">From:</string>
-    <string name="to">To:</string>
+    <string name="from">From: </string>
+    <string name="to">To: </string>
     <string name="search">Search</string>
     <string name="divider"> <![CDATA[ -> ]]> </string>
     <string name="transfers">Transfers: </string>
@@ -30,4 +30,5 @@
     <string name="most_visited_station">Most visited station: </string>
     <string name="most_traveled">Most traveled: </string>
     <string name="history">History</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
