@@ -1,4 +1,3 @@
 package com.example.capstonereisplanner.results
 
-class TripResult {
-}
+class TripResult

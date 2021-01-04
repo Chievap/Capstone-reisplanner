@@ -10,5 +10,4 @@ class SavableStationRoute(
     val track: String,
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null,
-) {
-}
+)
