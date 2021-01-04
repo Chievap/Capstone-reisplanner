@@ -34,6 +34,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+        // Fetch stations
         stationViewModel.getStations()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -52,7 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        // Check if the stations are found to use for the long and lat
         stationViewModel.stations.observe(this, {
             stationList = it
             if (this::stationList.isInitialized && this::currentTrip.isInitialized) {
@@ -60,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         })
-
+        // Get the active trip
         activeTripViewModel.trips.observe(this, {
             currentTrip = it
 
@@ -70,9 +71,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
+    /**
+     * Add the markers to the map
+     */
     private fun addMarkers(mMap: GoogleMap) {
         val long = arrayListOf<Double>()
         val lat = arrayListOf<Double>()
+        // Add the long and lat of the stations to the map
         for (payload: Payload in stationList.payload) {
             if (payload.namen.lang == currentTrip[0].fromName || payload.namen.lang == currentTrip[0].destinationName) {
                 val marker = LatLng(payload.lat, payload.lng)
@@ -81,9 +86,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 markers[payload.namen.lang] = marker
             }
         }
+        // Add a marker for every entry in the map
         for (entry: MutableMap.MutableEntry<String, LatLng> in markers) {
             mMap.addMarker(MarkerOptions().position(entry.value).title(entry.key))
         }
+        // Move the camera position to the middle of the given stations
         mMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 calculateAndMoveCamera(

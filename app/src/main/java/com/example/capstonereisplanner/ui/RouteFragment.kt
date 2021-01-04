@@ -74,6 +74,16 @@ class RouteFragment : Fragment() {
         toStationCode = arguments?.getString(TO_STATION_ROUTE_CODE).toString()
         travelTime = requireArguments().getInt(TRAVEL_TIME)
 
+        setBindings()
+
+        // Add both stations to the list
+        stationRoutes.add(SavableStationRoute(fromStationName, fromStationTrack.toString()))
+        stationRoutes.add(SavableStationRoute(toStationName, toStationTrack.toString()))
+        adapter.notifyDataSetChanged()
+
+    }
+
+    private fun setBindings(){
         binding.ibStatistics.setOnClickListener { findNavController().navigate(R.id.action_routeFragment_to_statisticsFragment) }
         binding.bViewOnMap.setOnClickListener {
             val intent = Intent(context, MapsActivity::class.java)
@@ -97,11 +107,6 @@ class RouteFragment : Fragment() {
 
         binding.bActivate.setOnClickListener { onActivateClick() }
         binding.bFavoriteTrip.setOnClickListener { saveFavoriteTrip() }
-
-        stationRoutes.add(SavableStationRoute(fromStationName, fromStationTrack.toString()))
-        stationRoutes.add(SavableStationRoute(toStationName, toStationTrack.toString()))
-        adapter.notifyDataSetChanged()
-
     }
 
     private fun saveFavoriteTrip() {
@@ -113,7 +118,6 @@ class RouteFragment : Fragment() {
                 toStationCode
             )
         )
-
         observeCreateSuccess()
     }
 
@@ -140,10 +144,12 @@ class RouteFragment : Fragment() {
             fromStationTrack,
             toStationTrack
         )
+        // Delete the current active trip and save the new one
         activeTripViewModel.deleteTrips()
         viewModel.saveTrip(
             savableTrip
         )
+        // Enable the map button
         binding.bViewOnMap.isEnabled = true
         binding.bViewOnMap.isClickable = true
         Snackbar.make(binding.view, "Trip now activated", Snackbar.LENGTH_SHORT).show()

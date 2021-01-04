@@ -33,12 +33,4 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.statisticsFragment)
-        return when (item.itemId) {
-            R.id.statisticsFragment -> item.onNavDestinationSelected(navController)
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

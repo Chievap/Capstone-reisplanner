@@ -49,14 +49,7 @@ class SearchFragment : Fragment() {
         val fromCode = arguments?.getString(FROM_STATION_CODE)
         val toCode = arguments?.getString(TO_STATION_CODE)
 
-        mRecyclerView = binding.rc
-
-        adapter = TripAdapter(tripList, this::onClick)
-        mRecyclerView.adapter = adapter
-        mRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-
-        binding.ivStatistic.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_statisticsFragment) }
+        addBindings()
 
         if (fromCode != null && toCode != null) {
             viewModel.getTrip(fromCode, toCode)
@@ -68,6 +61,17 @@ class SearchFragment : Fragment() {
         observeTrips()
     }
 
+    private fun addBindings(){
+        mRecyclerView = binding.rc
+
+        adapter = TripAdapter(tripList, this::onClick)
+        mRecyclerView.adapter = adapter
+        mRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        binding.ivStatistic.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_statisticsFragment) }
+    }
+
     private fun observeTrips() {
         viewModel.trip.observe(viewLifecycleOwner, {
             this.tripList.clear()
@@ -76,6 +80,9 @@ class SearchFragment : Fragment() {
         })
     }
 
+    /**
+     * Add all arguments to the bundle and navigate to the route fragment
+     */
     private fun onClick(savableTrip: SavableTrip) {
         val args = Bundle()
         args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)

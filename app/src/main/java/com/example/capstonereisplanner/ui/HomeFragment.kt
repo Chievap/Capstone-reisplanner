@@ -70,23 +70,17 @@ class HomeFragment : Fragment() {
         searchAdapter = SearchAdapter(stationSuggestions, this::onStationClick)
         stationSuggestions.clear()
         searchAdapter.notifyDataSetChanged()
-        mSearchTextFrom = binding.searchTextFrom
-        changeStationSearch = mSearchTextFrom
-        mSearchTextTo = binding.searchTextTo
-        mRecyclerView = binding.listView
 
-        binding.bSearch.setOnClickListener { navigateToSearch() }
-        binding.ivStatistics.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_statisticsFragment) }
-        binding.activeRoute.activeGroup.visibility = View.GONE
-        binding.favoriteTripGroup.visibility = View.GONE
+        setBindings()
 
-        mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.adapter = searchAdapter
+        setTextChangeListeners()
 
-        mRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        observeStations()
+        observeActiveTrip()
+        observeFavoriteTrip()
+    }
 
-
+    private fun setTextChangeListeners() {
         mSearchTextFrom.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
@@ -119,10 +113,24 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
 
-        observeStations()
-        observeActiveTrip()
-        observeFavoriteTrip()
+    private fun setBindings() {
+        mSearchTextFrom = binding.searchTextFrom
+        changeStationSearch = mSearchTextFrom
+        mSearchTextTo = binding.searchTextTo
+        mRecyclerView = binding.listView
+
+        binding.bSearch.setOnClickListener { navigateToSearch() }
+        binding.ivStatistics.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_statisticsFragment) }
+        binding.activeRoute.activeGroup.visibility = View.GONE
+        binding.favoriteTripGroup.visibility = View.GONE
+
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.adapter = searchAdapter
+
+        mRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun observeFavoriteTrip() {
@@ -147,7 +155,7 @@ class HomeFragment : Fragment() {
             binding.favoriteTrip.rcFavoriteTrips.adapter = favoriteTripAdapter
 
             binding.favoriteTrip.rcFavoriteTrips.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
             favoriteTripAdapter.notifyDataSetChanged()
         })
