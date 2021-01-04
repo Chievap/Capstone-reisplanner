@@ -19,7 +19,9 @@ class TripConverter {
                     trips.legs[trips.legs.size - 1].destination.name,
                     checkCancelled(trips.legs),
                     trips.legs[0].origin.actualTrack,
-                    trips.legs[trips.legs.size - 1].destination.actualTrack
+                    trips.legs[trips.legs.size - 1].destination.actualTrack,
+                    trips.legs[0].origin.notes[trips.legs[0].origin.notes.size - 1].value,
+                    trips.legs[0].destination.notes[trips.legs[0].destination.notes.size - 1].value
                 )
             )
         }

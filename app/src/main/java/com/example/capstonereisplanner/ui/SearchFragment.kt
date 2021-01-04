@@ -81,9 +81,11 @@ class SearchFragment : Fragment() {
         args.putString(FROM_STATION_ROUTE_NAME, savableTrip.fromName)
         args.putString(FROM_STATION_ROUTE_TIME, savableTrip.departureTime)
         args.putInt(FROM_STATION_ROUTE_TRACK, savableTrip.fromTrack)
+        args.putString(FROM_STATION_ROUTE_CODE, savableTrip.fromCode)
         args.putString(TO_STATION_ROUTE_NAME, savableTrip.destinationName)
         args.putString(TO_STATION_ROUTE_TIME, savableTrip.arrivalTime)
         args.putInt(TO_STATION_ROUTE_TRACK, savableTrip.toTrack)
+        args.putString(TO_STATION_ROUTE_CODE, savableTrip.toCode)
         args.putInt(TRAVEL_TIME, savableTrip.plannedDurationInMinutes)
         findNavController().navigate(R.id.action_SecondFragment_to_routeFragment, args)
     }

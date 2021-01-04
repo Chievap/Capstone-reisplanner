@@ -15,6 +15,8 @@ class SavableTrip(
         val cancelled: Boolean,
         val fromTrack: Int,
         val toTrack: Int,
+        val fromCode: String? = null,
+        val toCode: String? = null,
         @PrimaryKey(autoGenerate = true)
         val id: Long? = null,
 )

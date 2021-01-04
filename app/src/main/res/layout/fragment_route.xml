@@ -97,6 +97,12 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <View
+                    android:id="@+id/view20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <Button
                     android:id="@+id/b_activate"
                     android:layout_width="wrap_content"
@@ -110,9 +116,9 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/b_favorite_trip"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/saveIcon"
                     android:src="@drawable/ic_baseline_save" />
 
@@ -141,8 +147,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_stations"
-        android:layout_width="409dp"
-        android:layout_height="406dp"
+        android:layout_width="407dp"
+        android:layout_height="371dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
