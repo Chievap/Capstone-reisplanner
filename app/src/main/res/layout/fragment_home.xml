@@ -107,14 +107,15 @@
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_baseline_settings_24" />
+            app:srcCompat="@drawable/ic_baseline_settings_24"
+            android:contentDescription="@string/statistics" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_view"
-        android:layout_width="408dp"
-        android:layout_height="494dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout"
         android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,5 +124,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="1.0" />
+
+    <include
+        android:id="@+id/favorite_trip"
+        layout="@layout/item_favorite_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/list_view"
+        android:layout_marginBottom="-255dp" />
 
 </RelativeLayout>
