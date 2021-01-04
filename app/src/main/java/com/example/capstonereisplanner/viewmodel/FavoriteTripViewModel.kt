@@ -10,7 +10,7 @@ import com.example.capstonereisplanner.repository.FavoriteTripRepository
 import kotlinx.coroutines.launch
 
 class FavoriteTripViewModel(application: Application) : AndroidViewModel(application) {
-    private val TAG = "FIRESTORE"
+    private val tag = "FIRESTORE"
     private val favoriteTripRepository: FavoriteTripRepository = FavoriteTripRepository()
 
     val favoriteTrip: LiveData<FavoriteTrip> = favoriteTripRepository.favoriteTrip
@@ -22,7 +22,7 @@ class FavoriteTripViewModel(application: Application) : AndroidViewModel(applica
             try {
                 favoriteTripRepository.getFavoriteTrips()
             }catch (e: Exception){
-                Log.e(TAG, e.toString() )
+                Log.e(tag, e.toString() )
             }
         }
     }
@@ -32,7 +32,7 @@ class FavoriteTripViewModel(application: Application) : AndroidViewModel(applica
             try {
                 favoriteTripRepository.createFavoriteTrip(favoriteTrip)
             }catch (e: Exception){
-                Log.e(TAG, e.toString() )
+                Log.e(tag, e.toString() )
             }
         }
     }

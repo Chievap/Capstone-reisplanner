@@ -3,9 +3,7 @@ package com.example.capstonereisplanner.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import com.example.capstonereisplanner.R
-import com.example.capstonereisplanner.entity.SavableStation
 import com.example.capstonereisplanner.entity.SavableTrip
 import com.example.capstonereisplanner.model.StationResult
 import com.example.capstonereisplanner.model.stationDetail.Payload
@@ -18,7 +16,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import java.util.*
 import kotlin.collections.HashMap
 
 const val ZOOM_LEVEL = 7.0

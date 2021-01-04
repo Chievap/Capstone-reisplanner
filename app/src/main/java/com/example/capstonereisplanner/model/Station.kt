@@ -23,6 +23,51 @@ data class Station (
     fun getFullName() = namen.lang
     fun getMiddleName() = namen.middel
     fun getShortName() = namen.kort
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Station
+
+        if (uICCode != other.uICCode) return false
+        if (stationType != other.stationType) return false
+        if (EVACode != other.EVACode) return false
+        if (code != other.code) return false
+        if (!sporen.contentEquals(other.sporen)) return false
+        if (!synoniemen.contentEquals(other.synoniemen)) return false
+        if (faciliteiten != other.faciliteiten) return false
+        if (vertrektijden != other.vertrektijden) return false
+        if (reisassistentie != other.reisassistentie) return false
+        if (namen != other.namen) return false
+        if (land != other.land) return false
+        if (lat != other.lat) return false
+        if (lng != other.lng) return false
+        if (radius != other.radius) return false
+        if (naderenRadius != other.naderenRadius) return false
+        if (ingangsDatum != other.ingangsDatum) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = uICCode.hashCode()
+        result = 31 * result + stationType.hashCode()
+        result = 31 * result + EVACode.hashCode()
+        result = 31 * result + code.hashCode()
+        result = 31 * result + sporen.contentHashCode()
+        result = 31 * result + synoniemen.contentHashCode()
+        result = 31 * result + faciliteiten.hashCode()
+        result = 31 * result + vertrektijden.hashCode()
+        result = 31 * result + reisassistentie.hashCode()
+        result = 31 * result + namen.hashCode()
+        result = 31 * result + land.hashCode()
+        result = 31 * result + lat.hashCode()
+        result = 31 * result + lng.hashCode()
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + naderenRadius.hashCode()
+        result = 31 * result + ingangsDatum.hashCode()
+        return result
+    }
 }
 
 data class Names(

@@ -2,13 +2,10 @@ package com.example.capstonereisplanner.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstonereisplanner.R
 import com.example.capstonereisplanner.databinding.ItemStationBinding
 import com.example.capstonereisplanner.entity.SavableStation
-import kotlinx.android.synthetic.main.item_station.view.*
 
 class SearchAdapter(
     private val stationList: List<SavableStation>,

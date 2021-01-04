@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.capstonereisplanner.api.StationApi
 import com.example.capstonereisplanner.api.StationApiService
 import com.example.capstonereisplanner.model.StationResult
-import com.example.capstonereisplanner.results.StationSearchResult
 
 class StationRepository {
     private val stationApiService: StationApiService = StationApi.createApi()

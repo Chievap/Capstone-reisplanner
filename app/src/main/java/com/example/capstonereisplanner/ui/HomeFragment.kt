@@ -180,7 +180,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeActiveTrip() {
-        activeTripViewModel.trips.observe(viewLifecycleOwner, { it: List<SavableTrip> ->
+        activeTripViewModel.trips.observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 val savableTrip = it[0]
                 binding.activeRoute.tvFromActive.text = savableTrip.fromName
