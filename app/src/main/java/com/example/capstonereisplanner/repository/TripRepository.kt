@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.capstonereisplanner.api.TripApi
 import com.example.capstonereisplanner.model.Trip
 
-class TripRepository {
+class TripRepository() {
     private val tripApiService = TripApi.createApi()
 
     private val _trip: MutableLiveData<Trip> = MutableLiveData()

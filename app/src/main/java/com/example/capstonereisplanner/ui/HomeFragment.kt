@@ -13,13 +13,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonereisplanner.R
+import com.example.capstonereisplanner.adapter.FavoriteTripAdapter
 import com.example.capstonereisplanner.adapter.SearchAdapter
+import com.example.capstonereisplanner.adapter.TripAdapter
 import com.example.capstonereisplanner.converter.StationConverter
+import com.example.capstonereisplanner.converter.TripConverter
 import com.example.capstonereisplanner.databinding.FragmentHomeBinding
 import com.example.capstonereisplanner.entity.SavableStation
 import com.example.capstonereisplanner.entity.SavableTrip
+import com.example.capstonereisplanner.model.FavoriteTrip
 import com.example.capstonereisplanner.viewmodel.ActiveTripViewModel
+import com.example.capstonereisplanner.viewmodel.FavoriteTripViewModel
 import com.example.capstonereisplanner.viewmodel.StationViewModel
+import com.example.capstonereisplanner.viewmodel.TripViewModel
 import java.util.*
 
 /**
@@ -28,6 +34,8 @@ import java.util.*
 class HomeFragment : Fragment() {
     private val viewModel: StationViewModel by viewModels()
     private val activeTripViewModel: ActiveTripViewModel by viewModels()
+    private val favoriteTripViewModel: FavoriteTripViewModel by viewModels()
+    private val tripViewModel: TripViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mSearchTextFrom: EditText
@@ -35,9 +43,11 @@ class HomeFragment : Fragment() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var changeStationSearch: EditText
     private lateinit var searchAdapter: SearchAdapter
+    private lateinit var favoriteTripAdapter: FavoriteTripAdapter
 
     private var fromStation: String = ""
     private var toStation: String = ""
+    private val tripConverter: TripConverter = TripConverter()
 
     private val stationList = arrayListOf<SavableStation>()
     private val stationSuggestions = arrayListOf<SavableStation>()
@@ -49,6 +59,7 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         viewModel.getStations()
+        favoriteTripViewModel.getFavoriteTrip()
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         return binding.root
@@ -67,6 +78,7 @@ class HomeFragment : Fragment() {
         binding.bSearch.setOnClickListener { navigateToSearch() }
         binding.ivStatistics.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_statisticsFragment) }
         binding.activeRoute.activeGroup.visibility = View.GONE
+        binding.favoriteTripGroup.visibility = View.GONE
 
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.adapter = searchAdapter
@@ -110,6 +122,35 @@ class HomeFragment : Fragment() {
 
         observeStations()
         observeActiveTrip()
+        observeFavoriteTrip()
+    }
+
+    private fun observeFavoriteTrip() {
+        var favoriteTrip: FavoriteTrip
+        favoriteTripViewModel.favoriteTrip.observe(viewLifecycleOwner, {
+            if (it != null) {
+                favoriteTrip = it
+                binding.favoriteTripGroup.visibility = View.VISIBLE
+                binding.favoriteTrip.tvFavoriteFrom.text = favoriteTrip.fromName
+                binding.favoriteTrip.tvFavoriteto.text = favoriteTrip.toName
+
+                tripViewModel.getTrip(favoriteTrip.fromCode, favoriteTrip.toCode)
+                observeTripResult()
+            }
+        })
+    }
+
+    private fun observeTripResult() {
+        tripViewModel.trip.observe(viewLifecycleOwner, {
+            favoriteTripAdapter = FavoriteTripAdapter(tripConverter.convertTrips(it))
+
+            binding.favoriteTrip.rcFavoriteTrips.adapter = favoriteTripAdapter
+
+            binding.favoriteTrip.rcFavoriteTrips.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+            favoriteTripAdapter.notifyDataSetChanged()
+        })
     }
 
     private fun filterSuggestions(searchTerm: String) {
