@@ -136,7 +136,7 @@ class HomeFragment : Fragment() {
     private fun observeFavoriteTrip() {
         var favoriteTrip: FavoriteTrip
         favoriteTripViewModel.favoriteTrip.observe(viewLifecycleOwner, {
-            if (it != null) {
+            if (it != null && it.fromCode != "null" && it.toCode != "null") {
                 favoriteTrip = it
                 binding.favoriteTripGroup.visibility = View.VISIBLE
                 binding.favoriteTrip.tvFavoriteFrom.text = favoriteTrip.fromName
